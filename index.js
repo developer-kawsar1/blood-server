@@ -35,7 +35,7 @@ async function run(){
   }
 }
 app.get('/',(req,res)=>{
-    res.send(uri)
+    res.send("surver is running ")
 })
 app.listen(port,()=>{
     console.log("app is running on " ,port);
