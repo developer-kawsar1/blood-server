@@ -23,7 +23,7 @@ async function run(){
     //  product/:id
     app.get('/donors', async(req,res)=>{
         const query={}
-        const cursor=serviceCollection.find(query);
+        const cursor=donorsCollection.find(query);
         const donors= await cursor.toArray() 
         res.send(donors)
     })  
