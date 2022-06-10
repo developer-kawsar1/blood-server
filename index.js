@@ -21,7 +21,12 @@ async function run(){
      const donorsCollection=client.db('donorsDb').collection('donor') 
         
     //  product/:id
-    
+    app.get('/donors', async(req,res)=>{
+        const query={}
+        const cursor=serviceCollection.find(query);
+        const donors= await cursor.toArray() 
+        res.send(donors)
+    })  
      app.get('/donors/:id',async(req,res)=>{
         const id=req.params.id
          const group= String(id)
