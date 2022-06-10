@@ -29,7 +29,19 @@ async function run(){
          const cursor=donorsCollection.find(query)
          const donors=await cursor.toArray()
          res.send(donors)
-     })
+     }) 
+
+    //  post api 
+
+    app.post('/donors',async(req,res)=>{
+        const newDonor=req.body 
+        console.log(newProduct);
+        const result=await donorsCollection.insertOne(newDonor) 
+        res.send(result) 
+        console.log(result); 
+        
+
+    }) 
   }finally{
 
   }
