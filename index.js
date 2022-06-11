@@ -1,7 +1,7 @@
 const express = require('express'); 
 require('dotenv').config()
 const cors = require('cors');  
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const { log } = require('console');
 
 
@@ -22,12 +22,26 @@ async function run(){
         
     //  product/:id
     app.get('/donors', async(req,res)=>{
-        const query={}
+        const query={} 
+        // console.log(req);
         const cursor=donorsCollection.find(query);
         const donors= await cursor.toArray() 
         res.send(donors)
     })  
-     app.get('/donors/:id',async(req,res)=>{
+    app.get('/donors/:id', async(req,res)=>{
+        const id=req.params.id
+        // console.log(req);
+        const query={_id:ObjectId(id)} 
+        const donor= await donorsCollection.findOne(query)
+        res.send(donor)
+    })  
+    app.delete('/donors/:id', async(req,res)=>{
+        const id=req.params.id 
+        const query={_id:ObjectId(id)}
+        const result=await donorsCollection.deleteOne(query)
+        res.send(result)
+    })  
+     app.get('/groups/:id',async(req,res)=>{
         const id=req.params.id
          const group= String(id)
          const query={blood:group} 
