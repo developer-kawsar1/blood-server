@@ -88,7 +88,7 @@ async function run(){
   }
 }
 app.get('/',(req,res)=>{
-    res.send("surver is running on my pc ")
+    res.send("surver is running on my pc fdsf")
 })
 app.listen(port,()=>{
     console.log("app is running on " ,port);
