@@ -40,7 +40,29 @@ async function run(){
         const query={_id:ObjectId(id)}
         const result=await donorsCollection.deleteOne(query)
         res.send(result)
-    })  
+    })   
+
+
+    // update 
+
+        // update user
+        app.put('/donors/:id', async(req, res) =>{
+            const id = req.params.id;
+            const updatedUser = req.body;
+            const filter = {_id: ObjectId(id)};
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    name: updatedUser.name
+                    // date: updatedUser.date
+                }
+            };
+            const result = await donorsCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+
+        })
+      
+    // update
      app.get('/groups/:id',async(req,res)=>{
         const id=req.params.id
          const group= String(id)
@@ -66,7 +88,7 @@ async function run(){
   }
 }
 app.get('/',(req,res)=>{
-    res.send("surver is running on pc ")
+    res.send("surver is running on my pc ")
 })
 app.listen(port,()=>{
     console.log("app is running on " ,port);
